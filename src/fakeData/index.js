@@ -2,7 +2,7 @@ const foodData =
     [
 
         {
-            'id': 'b1',
+            '_id': 'b1',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -13,7 +13,7 @@ const foodData =
             'img': 'https://i.ibb.co/BVB7bBs/breakfast1.png'
         },
         {
-            'id': 'b2',
+            '_id': 'b2',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -24,7 +24,7 @@ const foodData =
             'img': 'https://i.ibb.co/LSbSj0m/breakfast3.png'
         },
         {
-            'id': 'b3',
+            '_id': 'b3',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -35,7 +35,7 @@ const foodData =
             'img': 'https://i.ibb.co/Yf2qvMJ/breakfast4.png'
         },
         {
-            'id': 'b4',
+            '_id': 'b4',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -46,7 +46,7 @@ const foodData =
             'img': 'https://i.ibb.co/0htB86s/breakfast5.png'
         },
         {
-            'id': 'b5',
+            '_id': 'b5',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -57,7 +57,7 @@ const foodData =
             'img': 'https://i.ibb.co/BrKxXd1/breakfast6.png'
         },
         {
-            'id': 'b6',
+            '_id': 'b6',
             'name': 'Breakfast sandwich',
             'category': 'breakfast',
             'shotDescription': 'How we dream about our future',
@@ -71,7 +71,7 @@ const foodData =
 
 
         {
-            'id': 'L1',
+            '_id': 'L1',
             'name': 'Lunch Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -82,7 +82,7 @@ const foodData =
             'img': 'https://i.ibb.co/G33pGCK/lunch2.png'
         },
         {
-            'id': 'L2',
+            '_id': 'L2',
             'name': 'Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -93,7 +93,7 @@ const foodData =
             'img': 'https://i.ibb.co/1JyGnVX/lunch3.png'
         },
         {
-            'id': 'L3',
+            '_id': 'L3',
             'name': 'Lunch Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -104,7 +104,7 @@ const foodData =
             'img': 'https://i.ibb.co/QQcxcfD/lunch4.png'
         },
         {
-            'id': 'L4',
+            '_id': 'L4',
             'name': 'Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -115,7 +115,7 @@ const foodData =
             'img': 'https://i.ibb.co/ZK9RH1C/lunch5.png'
         },
         {
-            'id': 'L5',
+            '_id': 'L5',
             'name': 'Lunch Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -126,7 +126,7 @@ const foodData =
             'img': 'https://i.ibb.co/w7wmkVL/lunch6.png'
         },
         {
-            'id': 'L6',
+            '_id': 'L6',
             'name': ' Fried Chicken Bents',
             'category': 'lunch',
             'shotDescription': 'How we dream about our future',
@@ -141,7 +141,7 @@ const foodData =
 
 
         {
-            'id': 'D1',
+            '_id': 'D1',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
@@ -152,7 +152,7 @@ const foodData =
             'img': 'https://i.ibb.co/QvnJnxY/dinner1.png'
         },
         {
-            'id': 'D2',
+            '_id': 'D2',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
@@ -163,7 +163,7 @@ const foodData =
             'img': 'https://i.ibb.co/Y0Zchc0/dinner2.png'
         },
         {
-            'id': 'D3',
+            '_id': 'D3',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
@@ -174,7 +174,7 @@ const foodData =
             'img': 'https://i.ibb.co/7SVM1qf/dinner3.png'
         },
         {
-            'id': 'D4',
+            '_id': 'D4',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
@@ -185,7 +185,7 @@ const foodData =
             'img': 'https://i.ibb.co/Xpdr7L6/dinner4.png'
         },
         {
-            'id': 'D5',
+            '_id': 'D5',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
@@ -196,7 +196,7 @@ const foodData =
             'img': 'https://i.ibb.co/2KCQKXT/dinner5.png'
         },
         {
-            'id': 'D6',
+            '_id': 'D6',
             'name': 'Lemony Salmon Piccard',
             'category': 'dinner',
             'shotDescription': 'How we dream about our future',
