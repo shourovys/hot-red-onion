@@ -1,0 +1,6 @@
+.logo-container {
+}
+.logo-container > img {
+  width: 9rem;
+  margin: 0.2rem;
+}
