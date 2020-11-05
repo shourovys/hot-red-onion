@@ -1,9 +1,8 @@
 import React from 'react';
 import './AddToCartBtn.css'
 
-const AddToCartBtn = (props) => {
-    const { addToCart, foodId } = props
-    console.log(props);
+const AddToCartBtn = ({ addToCart, foodId }) => {
+
     return (
         <button
             onClick={() => addToCart(foodId)}

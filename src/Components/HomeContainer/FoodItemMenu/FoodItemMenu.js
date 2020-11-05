@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import './FoodItemMenu.css'
 import FoodItemContainer from '../FoodItemContainer/FoodItemContainer';
+import SquareBtn from '../../Common/SquareBtn/SquareBtn';
 
 
 
 const FoodItemMenu = () => {
+    const [isActive, setIsActive] = useState(false)
+    const makeBtnActive = status => setIsActive(status)
+
     const [category, setCategory] = useState('lunch')
-    const selectedMenu = (categoryName) => {
-        if (category === categoryName) {
-            return 'selected menuItem'
-        }
-        return 'menuItem'
-    }
+    const selectedMenu = categoryName => category === categoryName ? 'selected menuItem' : 'menuItem'
+
     return (
         <div className='FoodItemMenu'>
             <div className="foodMenuLink">
@@ -36,7 +36,13 @@ const FoodItemMenu = () => {
                     Dinner
                 </li>
             </div>
-            <FoodItemContainer category={category} />
+            <FoodItemContainer category={category} makeBtnActive={makeBtnActive} />
+            <SquareBtn
+                isActive={isActive}
+                path='/order'
+            >
+                Checkout your foods
+            </SquareBtn>
         </div>
     );
 };

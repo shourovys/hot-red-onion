@@ -19,7 +19,7 @@
 }
 .foodItem > p {
   font-size: 12px;
-  opacity: 0.2;
+  opacity: 0.5;
   font-weight: 600;
   margin: 0.3rem 0;
 }

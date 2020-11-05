@@ -6,14 +6,14 @@ import './FoodItemContainer.css'
 import { connect } from 'react-redux';
 import { addToCart } from '../../../Redux/Action/CartAction'
 
-const FoodItemContainer = ({ addToCart, category }) => {
+const FoodItemContainer = ({ addToCart, category, cart, makeBtnActive }) => {
     const [currentCategoryFoods, setCurrentCategoryFoods] = useState([])
 
     useEffect(() => {
         setCurrentCategoryFoods(foodData.filter(item => item.category === category))
     }, [category])
 
-
+    makeBtnActive(cart.length > 0)
     return (
         <div className='FoodItemContainer'>
             {
@@ -29,7 +29,9 @@ const FoodItemContainer = ({ addToCart, category }) => {
 };
 
 const mapStateToProps = state => {
-    return {}
+    return {
+        cart: state.cart
+    }
 }
 const mapDispatchToProps = { addToCart }
 
