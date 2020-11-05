@@ -7,6 +7,7 @@
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
+  list-style: none;
 }
 .menuItem {
   margin: 0 1rem;

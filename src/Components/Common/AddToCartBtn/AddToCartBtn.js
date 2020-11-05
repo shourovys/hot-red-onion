@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addToCart } from '../../../Redux/Action/CartAction';
 import './AddToCartBtn.css'
 
 const AddToCartBtn = (props) => {
@@ -14,9 +12,6 @@ const AddToCartBtn = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {}
-}
-const mapDispatchToProps = { addToCart }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCartBtn);
+
+export default AddToCartBtn;

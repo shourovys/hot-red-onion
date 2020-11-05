@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import foodData from '../../../fakeData';
 import FoodItem from './FoodItem/FoodItem';
 import './FoodItemContainer.css'
+import { connect } from 'react-redux';
+import { addToCart } from '../../../Redux/Action/CartAction'
 
-const FoodItemContainer = () => {
-    const { category } = useParams()
+const FoodItemContainer = ({ addToCart, category }) => {
     const [currentCategoryFoods, setCurrentCategoryFoods] = useState([])
 
     useEffect(() => {
@@ -16,10 +17,20 @@ const FoodItemContainer = () => {
     return (
         <div className='FoodItemContainer'>
             {
-                currentCategoryFoods.map(food => <FoodItem key={food._id} food={food} />)
+                currentCategoryFoods.map(food =>
+                    <FoodItem
+                        key={food._id}
+                        food={food}
+                        addToCart={addToCart}
+                    />)
             }
         </div>
     );
 };
 
-export default FoodItemContainer;
+const mapStateToProps = state => {
+    return {}
+}
+const mapDispatchToProps = { addToCart }
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodItemContainer);

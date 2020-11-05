@@ -1,44 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FoodItemMenu.css'
-import { NavLink, Switch, Route } from 'react-router-dom'
 import FoodItemContainer from '../FoodItemContainer/FoodItemContainer';
 
 
+
 const FoodItemMenu = () => {
+    const [category, setCategory] = useState('lunch')
+    const selectedMenu = (categoryName) => {
+        if (category === categoryName) {
+            return 'selected menuItem'
+        }
+        return 'menuItem'
+    }
     return (
         <div className='FoodItemMenu'>
             <div className="foodMenuLink">
-                <NavLink
-                    activeClassName="selected"
-                    className='menuItem'
-                    to='/menu/breakfast'
+                <li
+                    className={selectedMenu('breakfast')}
+                    onClick={() => { setCategory('breakfast') }}
                 >
                     Breakfast
-                </NavLink>
+                </li>
 
-                <NavLink
-                    activeClassName="selected"
-                    className='menuItem'
-                    to='/menu/lunch'
+                <li
+                    className={selectedMenu('lunch')}
+                    onClick={() => { setCategory('lunch') }}
                 >
                     Lunch
-                </NavLink>
+                </li>
 
-                <NavLink
-                    activeClassName="selected"
-                    className='menuItem'
-                    to='/menu/dinner'
+                <li
+                    className={selectedMenu('dinner')}
+                    onClick={() => { setCategory('dinner') }}
                 >
                     Dinner
-                </NavLink>
+                </li>
             </div>
-
-            <Switch>
-                <Route path='/menu/:category'>
-                    <FoodItemContainer />
-                </Route>
-            </Switch>
-
+            <FoodItemContainer category={category} />
         </div>
     );
 };
