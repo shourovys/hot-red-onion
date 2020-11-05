@@ -8,3 +8,16 @@
 body {
   font-family: "Oxygen", sans-serif;
 }
+.btn {
+  cursor: pointer;
+  color: white;
+  background-color: red;
+  border-radius: 18px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  outline: none;
+}
+.btn:active {
+  box-shadow: 0 0 4px 6px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 4px 8px rgba(255, 255, 255, 0.6);
+}
