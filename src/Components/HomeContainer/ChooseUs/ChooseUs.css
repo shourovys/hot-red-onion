@@ -1,0 +1,21 @@
+.ChooseUs {
+  max-width: 1000px;
+  margin: 1rem auto;
+}
+.why_choose_us {
+  max-width: 30rem;
+}
+.why_choose_us > h3 {
+  font-size: 2rem;
+  line-height: 4rem;
+  margin: 0.5rem 0;
+  color: black;
+  opacity: 0.8;
+}
+.why_choose_us > p {
+  font-size: 13px;
+  line-height: 1.2rem;
+  opacity: 0.6;
+  font-weight: 600;
+  margin: 0.3rem 0;
+}
