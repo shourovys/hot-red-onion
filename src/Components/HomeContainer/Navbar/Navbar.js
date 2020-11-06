@@ -17,11 +17,12 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { MaterialNavbarStyle } from './MaterialStyle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { connect } from 'react-redux';
 
 
 
 
-export default function Navbar() {
+function Navbar({ cart }) {
     const classes = MaterialNavbarStyle();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -61,7 +62,7 @@ export default function Navbar() {
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={cart.length} color="secondary">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
@@ -108,3 +109,12 @@ export default function Navbar() {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+        cart: state.cart.cart
+    }
+}
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

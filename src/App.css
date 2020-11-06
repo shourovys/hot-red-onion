@@ -24,3 +24,12 @@ Link {
   box-shadow: 0 0 4px 6px rgba(255, 255, 255, 0.6);
   text-shadow: 0 0 4px 8px rgba(255, 255, 255, 0.6);
 }
+
+.tow_side_container {
+  display: flex;
+  gap: 1rem;
+}
+.left_side {
+}
+.right_side {
+}

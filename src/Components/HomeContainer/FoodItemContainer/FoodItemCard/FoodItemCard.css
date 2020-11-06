@@ -10,14 +10,19 @@
 .foodItem:hover {
   box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.1);
 }
-.foodItem > img {
+.foodItemInfo {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+.foodItemInfo > img {
   width: 10rem;
   margin-bottom: 0.6rem;
 }
-.foodItem > h4 {
+.foodItemInfo > h4 {
   margin: 0.3rem 0;
 }
-.foodItem > p {
+.foodItemInfo > p {
   font-size: 12px;
   opacity: 0.5;
   font-weight: 600;
