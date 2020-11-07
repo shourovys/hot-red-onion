@@ -13,7 +13,7 @@ const FoodItem = ({ food, addToCart }) => {
                 <p>{shotDescription}</p>
                 <h2>${price}</h2>
             </Link>
-            <AddToCartBtn foodId={_id} addToCart={addToCart} />
+            <AddToCartBtn foodId={_id} addToCart={addToCart} quantity={1} />
         </div>
     );
 };

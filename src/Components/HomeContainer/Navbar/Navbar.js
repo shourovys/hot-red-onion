@@ -23,6 +23,7 @@ import { connect } from 'react-redux';
 
 
 function Navbar({ cart }) {
+    console.log(cart)
     const classes = MaterialNavbarStyle();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);

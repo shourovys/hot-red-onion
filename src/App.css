@@ -27,9 +27,15 @@ Link {
 
 .tow_side_container {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70vh;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 .left_side {
+  /* flex-basis: 50%; */
 }
 .right_side {
+  flex-basis: 45%;
 }
