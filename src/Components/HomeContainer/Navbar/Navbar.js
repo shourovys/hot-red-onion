@@ -23,7 +23,6 @@ import { connect } from 'react-redux';
 
 
 function Navbar({ cart }) {
-    console.log(cart)
     const classes = MaterialNavbarStyle();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -60,18 +59,30 @@ function Navbar({ cart }) {
                         <Logo />
                     </Typography>
 
+
                     <div className={classes.grow} />
+                    {/* <IconButton aria-label="show 4 new mails" color="inherit">
+                        <Badge badgeContent={cart.length} color="secondary">
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </IconButton>
+                    <IconButton aria-label="show 17 new notifications" color="inherit">
+                        <Badge badgeContent={17} color="secondary">
+                            <NotificationsIcon />
+                        </Badge>
+                    </IconButton> */}
+                    <button className="btn">Login</button>
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 4 new mails" color="inherit">
+                        {/* <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={cart.length} color="secondary">
                                 <ShoppingCartIcon />
                             </Badge>
-                        </IconButton>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
+                        </IconButton> */}
+                        {/* <IconButton aria-label="show 17 new notifications" color="inherit">
                             <Badge badgeContent={17} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
-                        </IconButton>
+                        </IconButton> */}
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
@@ -83,6 +94,7 @@ function Navbar({ cart }) {
                             <AccountCircle />
                         </IconButton>
                     </div>
+
                     <div className={classes.sectionMobile}>
                         <IconButton
                             aria-label="show more"

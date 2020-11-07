@@ -1,6 +1,14 @@
 .logo-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 .logo-container > img {
   width: 9rem;
   margin: 0.2rem;
+}
+@media (max-width: 350px) {
+  .logo-container > img {
+    width: 7rem;
+  }
 }

@@ -6,7 +6,13 @@
 
 .FoodItemInfo {
   max-width: 24rem;
-  margin: 0 1rem;
+  margin: 2rem 1rem;
+}
+@media (max-width: 785px) {
+  .FoodItemInfo {
+    max-width: 90vw !important;
+    margin: 0 1rem;
+  }
 }
 .FoodItemInfo > h1 {
   margin: 1rem 0;
@@ -32,17 +38,12 @@
 .bigImg > img {
   min-width: 16rem;
   max-width: 90%;
-  margin: 1rem;
   min-height: 16rem;
   max-height: 90%;
   object-fit: cover;
 }
-/* @media (max-width: 785px) {
-  .FoodItem {
-    padding-top: 50vh;
-  }
-}
-@media (max-width: 350px) {
+
+/* @media (max-width: 350px) {
   .FoodItem {
     padding-top: 70vh;
   }

@@ -35,16 +35,17 @@ const FoodItem = ({ getFoodItemData, foodItemData, addToCart, sameCategoryFood, 
                         <HandelQuantity quantity={quantity} setQuantity={setQuantity} />
                     </div>
                     <AddToCartBtn addToCart={addToCart} foodId={foodId} quantity={quantity} />
+                    {
+
+                        sameCategoryFood.length > 0 &&
+                        <FoodImgSlider sameCategoryFood={sameCategoryFood} />
+                    }
                 </div>
                 <div className="right_side bigImg">
                     <img src={img} alt="" />
                 </div>
             </div>
-            {
 
-                sameCategoryFood.length > 0 &&
-                <FoodImgSlider sameCategoryFood={sameCategoryFood} />
-            }
         </div>
     );
 };

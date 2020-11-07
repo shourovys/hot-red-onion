@@ -8,6 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 
 
@@ -26,22 +28,7 @@ const Nav = (props) => {
                 open={isMobileMenuOpen}
                 onClose={handleMobileMenuClose}
             >
-                <MenuItem>
-                    <IconButton aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Cart</p>
-                </MenuItem>
-                <MenuItem>
-                    <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <Badge badgeContent={11} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Notifications</p>
-                </MenuItem>
+
                 <MenuItem onClick={handleProfileMenuOpen}>
                     <IconButton
                         aria-label="account of current user"
@@ -53,6 +40,23 @@ const Nav = (props) => {
                     </IconButton>
                     <p>Profile</p>
                 </MenuItem>
+                <MenuItem>
+                    <IconButton aria-label="show 11 new notifications" color="inherit">
+                        <Badge badgeContent={11} color="secondary">
+                            <DashboardIcon />
+                        </Badge>
+                    </IconButton>
+                    <p>Dashboard</p>
+                </MenuItem>
+                <MenuItem>
+                    <IconButton aria-label="show 4 new mails" color="inherit">
+                        <Badge color="secondary">
+                            <ExitToAppIcon />
+                        </Badge>
+                    </IconButton>
+                    <p>Log out</p>
+                </MenuItem>
+
             </Menu>
 
             <Menu
