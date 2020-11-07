@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import './FoodImgSlider.css'
-// import Carousel from "react-elastic-carousel";
-
 
 const FoodImgSlider = ({ sameCategoryFood }) => {
-    const breakPoints = [
-        { width: 550, itemsToShow: 2, itemsToScroll: 2 }
-    ];
+    const [index, setIndex] = useState(0)
+    const handelIndexBack = () => {
+        setIndex(index > 0 ? index - 1 : sameCategoryFood.length - 2)
+
+    }
+    const handelIndexForward = () => {
+        setIndex(index < sameCategoryFood.length - 2 ? index + 1 : 0)
+    }
+
+
     return (
-        <div className="App">
-            {/* <Carousel> */}
-            {/* {
-                    sameCategoryFood.map(food =>
-                        <Link>
-                            <img src={food.img} alt="" />
-                        </Link>)
-                } */}
-            {/* </Carousel> */}
+        <div className="FoodImgSlider">
+            <button onClick={handelIndexBack}> <ArrowBackIosIcon /> </button>
+            <Link>
+                <img className="FoodImgSliderImg" src={sameCategoryFood[index].img} alt={index} />
+            </Link>
+            <Link>
+                <img className="FoodImgSliderImg" src={sameCategoryFood[index + 1].img} alt={index + 1} />
+            </Link>
+            <button onClick={handelIndexForward}><ArrowForwardIosIcon /></button>
         </div>
     );
 }

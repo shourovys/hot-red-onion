@@ -29,8 +29,8 @@ Link {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 70vh;
-  flex-wrap: wrap;
+  /* height: 65vh; */
+  flex-wrap: wrap-reverse;
   gap: 1rem;
 }
 .left_side {

@@ -25,8 +25,8 @@ const FoodItem = ({ getFoodItemData, foodItemData, addToCart, sameCategoryFood, 
     // console.log(sameCategoryFood);
 
     return (
-        <>
-            <div className='FoodItem tow_side_container'>
+        <div className='FoodItem'>
+            <div className=' tow_side_container'>
                 <div className="FoodItemInfo left_side">
                     <h1>{name}</h1>
                     <p>{description}</p>
@@ -45,7 +45,7 @@ const FoodItem = ({ getFoodItemData, foodItemData, addToCart, sameCategoryFood, 
                 sameCategoryFood.length > 0 &&
                 <FoodImgSlider sameCategoryFood={sameCategoryFood} />
             }
-        </>
+        </div>
     );
 };
 
