@@ -21,12 +21,12 @@ const Authentication = () => {
 
     return (
         <div className='authentication'>
-            <div className="">
+            {/* <div className="">
                 <img
                     className='svg'
                     src={currentUser.isLogin ? loginImg : sideImg} alt="side Img"
                 />
-            </div>
+            </div> */}
 
             {!currentUser.isLogin
                 ? <div className="login-container">

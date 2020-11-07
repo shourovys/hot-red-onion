@@ -3,7 +3,6 @@ import './AddToCartBtn.css'
 
 const AddToCartBtn = ({ addToCart, foodId, quantity }) => {
 
-    console.log(quantity);
     return (
         <button
             onClick={() => addToCart(foodId, quantity)}

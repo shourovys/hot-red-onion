@@ -54,15 +54,3 @@ export const inputVariant = (y) => {
     }
 }
 
-export const inputVariant3 = {
-    initial: { opacity: 0, y: 90 },
-    animate: animate
-}
-export const inputVariant4 = {
-    initial: { opacity: 0, y: 30 },
-    animate: animate
-}
-export const inputVariant5 = {
-    initial: { opacity: 0, y: -30 },
-    animate: animate
-}

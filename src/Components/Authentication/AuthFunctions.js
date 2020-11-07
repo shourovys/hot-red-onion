@@ -6,6 +6,8 @@ import "firebase/auth";
 import { firebaseConfig } from "./Firebase.config";
 // import { usePopup } from "../Notification/PopupContext";
 import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
+import { addCurrentUser } from "../../Redux/Action/UserInfoAction";
+import { connect } from "react-redux";
 firebase.initializeApp(firebaseConfig);
 
 
@@ -96,6 +98,10 @@ const AuthContext = props => {
             })
     }
 
+    useEffect(() => {
+        props.addCurrentUser(currentUser)
+        console.log('currentUser send')
+    }, [currentUser])
 
     return (
         <authContext.Provider value={{ sineUpWithGoogle, sineUpWithFacebook, sineUpWithEmail, logInWithEmail, logOut, currentUser }}>
@@ -103,7 +109,16 @@ const AuthContext = props => {
         </authContext.Provider>
     );
 };
-export default AuthContext;
+
+const mapStateToProps = state => {
+    return {}
+}
+const mapDispatchToProps = {
+    addCurrentUser
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthContext);
 export const useAuth = () => useContext(authContext)
 
 export const PrivateRoute = ({ children, ...rest }) => {

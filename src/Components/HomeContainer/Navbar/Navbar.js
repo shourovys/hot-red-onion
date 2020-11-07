@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../Common/Logo/Logo';
 import Nav from './Nav/Nav';
 import './Navbar.css'
@@ -18,11 +18,11 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { MaterialNavbarStyle } from './MaterialStyle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom'
 
 
 
-
-function Navbar({ cart }) {
+function Navbar({ cart, currentUserInfo }) {
     const classes = MaterialNavbarStyle();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -50,28 +50,51 @@ function Navbar({ cart }) {
     const menuId = 'primary-search-account-menu';
     const mobileMenuId = 'primary-search-account-menu-mobile';
 
+    const location = useLocation()
+    const [currentPath, setCurrentPath] = useState('')
+    useEffect(() => {
+        setCurrentPath(location.pathname)
+    }, [location.pathname])
+
     return (
         <div className='navbar' className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
 
                     <Typography className={classes.title} variant="h6" noWrap>
-                        <Logo />
+                        <Link to='/' className='link'>
+                            <Logo />
+                        </Link>
                     </Typography>
 
 
                     <div className={classes.grow} />
-                    {/* <IconButton aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={cart.length} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
-                    <IconButton aria-label="show 17 new notifications" color="inherit">
-                        <Badge badgeContent={17} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton> */}
-                    <button className="btn">Login</button>
+                    {
+                        currentUserInfo.isLogin &&
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <Badge badgeContent={cart.length} color="secondary">
+                                <ShoppingCartIcon />
+                            </Badge>
+                        </IconButton>
+
+                    }
+                    {
+                        currentUserInfo.isLogin &&
+                        <IconButton aria-label="show 17 new notifications" color="inherit">
+                            <Badge badgeContent={17} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+
+                    }
+                    {
+                        !currentUserInfo.isLogin && currentPath !== '/login' &&
+                        <Link to='/login' className='link'>
+                            <button className="btn">Login</button>
+                        </Link>
+                    }
+
+
                     <div className={classes.sectionDesktop}>
                         {/* <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={cart.length} color="secondary">
@@ -85,10 +108,10 @@ function Navbar({ cart }) {
                         </IconButton> */}
                         <IconButton
                             edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
                             aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
+                            onClick={handleMobileMenuOpen}
                             color="inherit"
                         >
                             <AccountCircle />
@@ -119,13 +142,15 @@ function Navbar({ cart }) {
                 mobileMoreAnchorEl={mobileMoreAnchorEl}
                 handleMobileMenuClose={handleMobileMenuClose}
             />
-        </div>
+        </div >
     );
 }
 
 const mapStateToProps = state => {
+    // console.log(state)
     return {
-        cart: state.cart.cart
+        cart: state.cart.cart,
+        currentUserInfo: state.userInfo.currentUserInfo
     }
 }
 const mapDispatchToProps = {}

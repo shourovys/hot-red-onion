@@ -173,15 +173,22 @@ const SignIn = ({ oldUser }) => {
                         </Grid>
                     </motion.div>
                 }
+                {
+                    daley &&
+                    <motion.div className="Login-action"
+                        variants={inputVariant(-60)}
+                        initial='initial'
+                        animate='animate'
 
-                <div className="Login-action">
-                    <button
-                        onClick={oldUser ? loginUser : sineUpNewUser}
-                        id='loginBtn'
                     >
-                        {oldUser ? 'LOGIN' : 'SIGN UP'}
-                    </button>
-                </div>
+                        <button
+                            onClick={oldUser ? loginUser : sineUpNewUser}
+                            id='loginBtn'
+                        >
+                            {oldUser ? 'LOGIN' : 'SIGN UP'}
+                        </button>
+                    </motion.div>
+                }
 
             </div>
 

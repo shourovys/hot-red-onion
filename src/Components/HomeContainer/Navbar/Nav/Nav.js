@@ -38,7 +38,7 @@ const Nav = (props) => {
                     >
                         <AccountCircle />
                     </IconButton>
-                    <p>Profile</p>
+                    <p>My Order</p>
                 </MenuItem>
                 <MenuItem>
                     <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -59,7 +59,7 @@ const Nav = (props) => {
 
             </Menu>
 
-            <Menu
+            {/* <Menu
                 anchorEl={anchorEl}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 id={menuId}
@@ -70,7 +70,7 @@ const Nav = (props) => {
             >
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
                 <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            </Menu>
+            </Menu> */}
         </div>
     );
 };

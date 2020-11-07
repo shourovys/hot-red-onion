@@ -50,7 +50,6 @@
   margin: 1rem 0;
   padding-left: 2rem;
   min-height: 8rem;
-  position: relative;
 }
 .light-text {
   color: rgb(131, 131, 131);
@@ -59,8 +58,6 @@
   font-weight: 600;
 }
 .Login-action {
-  position: absolute;
-  bottom: 0;
   display: flex;
   gap: 3rem;
   padding-left: 1rem;
@@ -72,6 +69,7 @@
   font-weight: 600;
   cursor: pointer;
   color: rgb(187, 185, 185);
+  align-self: flex-end;
 }
 .Login-action > p:hover {
   color: rgb(131, 131, 131);
@@ -85,7 +83,6 @@
   width: 8rem;
   margin-top: 3rem;
   display: block;
-
   background-color: #ff9800;
   border: none;
   outline: none;
