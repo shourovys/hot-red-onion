@@ -1,0 +1,15 @@
+.OrderInfo {
+  min-width: 100%;
+  min-width: 90vw;
+  margin: 1rem;
+}
+.OrderInfo > p {
+  font-size: 0.8rem;
+  opacity: 7;
+  font-weight: 530;
+  margin-bottom: 0.7rem;
+  letter-spacing: 1px;
+}
+.OrderInfo > samp {
+  font-weight: 650;
+}

@@ -26,10 +26,9 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <PrivateRoute path="order">
+          <Route path="/order">
             <Order />
-
-          </PrivateRoute>
+          </Route>
         </Switch>
       </AuthContext>
     </>

@@ -39,3 +39,24 @@ body {
 .right_side {
   flex-basis: 45%;
 }
+
+.squareBtn {
+  min-width: 26.8rem;
+  max-width: 100vw;
+  padding: 0 6rem;
+  height: 2.2rem;
+  margin: 1rem 0;
+  color: white;
+  background-color: red;
+  outline: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+@media (max-width: 440px) {
+  .squareBtn {
+    max-width: 90vw !important;
+    min-width: 21.8rem !important;
+  }
+}
