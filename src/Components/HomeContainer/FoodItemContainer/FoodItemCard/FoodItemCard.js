@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import AddToCartBtn from '../../../Common/AddToCartBtn/AddToCartBtn';
-import './FoodItemCard.css'
+// import './FoodItemCard.css'
 
 const FoodItem = ({ food, addToCart }) => {
     const { _id, name, category, price, img, shotDescription, description } = food

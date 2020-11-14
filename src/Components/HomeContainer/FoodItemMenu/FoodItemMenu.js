@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './FoodItemMenu.css'
-import FoodItemContainer from '../FoodItemContainer/FoodItemContainer';
 import SquareBtn from '../../Common/SquareBtn/SquareBtn';
+import FoodItemContainer from '../FoodItemContainer/FoodItemContainer';
+// import './FoodItemMenu.scss';
 
 
 
