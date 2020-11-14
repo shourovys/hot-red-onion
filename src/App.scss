@@ -4,6 +4,11 @@
 @import "./Components/HomeContainer/Search/Search.scss";
 @import "./Components/HomeContainer/FoodItemMenu/FoodItemMenu.scss";
 @import "./Components/HomeContainer/FoodItemContainer/FoodItemCard/FoodItemCard.scss";
+@import "./Components/OrderContainer/Order/Order.scss";
+@import "./Components/OrderContainer/DeliveryDetailsForm/DeliveryDetailsForm.scss";
+@import "./Components/OrderContainer/OrderInfo/OrderInfo.scss";
+@import "./Components/OrderContainer/OrderInfo/OrderedFood/OrderedFood.scss";
+@import "./Components/OrderContainer/OrderInfo/OrderedPrice/OrderedPrice.scss";
 
 $mainColor: red;
 $textColor: white;
@@ -14,6 +19,7 @@ $textColor: white;
     box-sizing: border-box;
 }
 body {
+    max-width: 100vw !important;
     font-family: "Oxygen", sans-serif;
 }
 .link {
@@ -34,10 +40,9 @@ body {
     }
 }
 .squareBtn {
-    min-width: 26.8rem;
-    max-width: 100vw;
+    width: 100%;
     padding: 0 6rem;
-    height: 2.2rem;
+    height: 2.4rem;
     margin: 1rem 0;
     color: $textColor;
     background-color: $mainColor;
@@ -46,12 +51,12 @@ body {
     font-size: 1.3rem;
     cursor: pointer;
     border-radius: 4px;
-    @include mq(440px) {
-        max-width: 90vw !important;
-        min-width: 21.8rem !important;
-    }
 }
-@media (max-width: 440px) {
-    .squareBtn {
-    }
+.active {
+    background-color: $mainColor;
+    cursor: pointer;
+}
+.inActive {
+    background-color: lightgray;
+    cursor: no-drop;
 }

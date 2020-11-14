@@ -18,9 +18,12 @@
     gap: 1rem;
 }
 @mixin leftSide {
+    flex-basis: 45%;
+    width: 100%;
 }
 @mixin rightSide {
     flex-basis: 45%;
+    width: 100%;
 }
 
 @mixin mq($size) {

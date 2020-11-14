@@ -1,11 +1,11 @@
 import React from 'react';
 import './AddToCartBtn.css'
 
-const AddToCartBtn = ({ addToCart, foodId, quantity }) => {
+const AddToCartBtn = ({ addToCart, quantity ,food}) => {
 
     return (
         <button
-            onClick={() => addToCart(foodId, quantity)}
+            onClick={() => addToCart(food, quantity)}
             className='btn add-to-cart-btn'
         >Add</button>
     );

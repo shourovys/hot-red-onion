@@ -1,16 +1,14 @@
-import { ADD_TO_CART, REMOVE_FORM_CART } from "../Action/CartAction";
+import { ADD_TO_CART,UPDATE_QUANTITY, REMOVE_FORM_CART } from "../Action/CartAction";
 
 const cartState = {
     cart: []
 }
 
 export const cartReducer = (state = cartState, action) => {
-
     const { cart } = state;
     switch (action.type) {
         case ADD_TO_CART:
             const sameProduct = state.cart.find(food => food.id === action.foodId);
-            console.log('same', sameProduct)
             let newCart;
             if (sameProduct) {
                 sameProduct.quantity = sameProduct.quantity + action.quantity;
@@ -21,13 +19,24 @@ export const cartReducer = (state = cartState, action) => {
                 const newObj = {
                     id: action.foodId,
                     quantity: action.quantity,
+                    name:action.name,
+                    img:action.img,
+                    price:action.price
                 }
                 newCart = [...cart, newObj];
             }
             return {
                 cart: newCart
             }
-
+        case UPDATE_QUANTITY:
+            return{
+                cart:state.cart.map(cartItem=>{
+                    if (cartItem.id===action.foodId) {
+                        cartItem.quantity=action.quantity
+                    }
+                    return cartItem
+                })
+            }
         case REMOVE_FORM_CART:
             return {
                 cart: state.cart.filter(cartId => cartId !== action.foodId)

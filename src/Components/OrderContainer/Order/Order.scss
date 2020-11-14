@@ -1,0 +1,39 @@
+.order {
+    max-width: 1000px;
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center !important;
+    flex-wrap: wrap;
+}
+@include mq(500px) {
+    .order {
+        padding: 1rem 0;
+    }
+}
+.DeliveryDetailsFormContainer {
+    @include leftSide;
+}
+.OrderInfoContainer {
+    @include rightSide;
+}
+
+@include mq(880px) {
+    .order {
+        max-width: 90vw !important;
+        margin: auto;
+    }
+    .order {
+        width: 80vw;
+        display: block;
+        margin: auto;
+    }
+}
+@include mq(440px) {
+    .order {
+        width: 90vw;
+        display: block;
+        margin: auto;
+    }
+}

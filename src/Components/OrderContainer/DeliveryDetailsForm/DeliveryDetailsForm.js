@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import './DeliveryDetailsForm.css'
+// import './DeliveryDetailsForm.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: '25ch',
+            width: '100%',
         },
     },
 }));
 
-export default function DeliveryDetailsForm() {
+export default function DeliveryDetailsForm({setAllDeliveryData}) {
     const classes = useStyles();
 
     const [deliveryDetails, setDeliveryDetails] = useState({})
     const [showError, setShowError] = useState({})
+
     const updateDeliveryDetails = (name, value) => setDeliveryDetails({ ...deliveryDetails, [name]: value })
     const updateShowError = (name, value = 'error') => setShowError({ ...showError, [name]: value })
 
@@ -33,11 +34,14 @@ export default function DeliveryDetailsForm() {
     const handelSubmit = (e) => {
         e.preventDefault()
         if (deliveryDetails.FlatNo && deliveryDetails.roodName && deliveryDetails.DeliveryInstruction) {
+            setAllDeliveryData(deliveryDetails)
             console.log(deliveryDetails);
         } else {
             //show error
         }
     }
+
+    
     return (
         <div className="DeliveryDetailsForm">
             <form className={classes.root} onSubmit={handelSubmit}>

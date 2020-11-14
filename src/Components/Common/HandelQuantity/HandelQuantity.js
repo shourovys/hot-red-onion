@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './HandelQuantity.css'
 
 const HandelQuantity = ({ quantity, setQuantity }) => {
-    // useEffect(() => {
-    //     getQuantity(quantity)
-    // }, [quantity])
+    
 
     return (
-        <div className='HandelQuantity'>
+        <main className='HandelQuantity'>
             <p
                 className='plus'
                 onClick={() => setQuantity(quantity + 1)}
@@ -23,7 +21,7 @@ const HandelQuantity = ({ quantity, setQuantity }) => {
             >
                 -
             </p>
-        </div>
+        </main>
     );
 };
 
