@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Navbar.css'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +16,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 const Nav = (props) => {
     const { handleMenuClose, isMenuOpen, isMobileMenuOpen, handleProfileMenuOpen, handleMobileMenuClose, menuId, mobileMenuId, anchorEl, mobileMoreAnchorEl } = props;
 
+    const history= useHistory()
 
     return (
         <div>
@@ -40,7 +41,7 @@ const Nav = (props) => {
                     </IconButton>
                     <p>My Order</p>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={()=>history.push('/dashboard')}>
                     <IconButton aria-label="show 11 new notifications" color="inherit">
                         <Badge badgeContent={11} color="secondary">
                             <DashboardIcon />

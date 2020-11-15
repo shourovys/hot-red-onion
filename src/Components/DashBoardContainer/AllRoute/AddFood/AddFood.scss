@@ -1,0 +1,17 @@
+.addFoodItem {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .foodItemInfo {
+        width: 20rem;
+        .img-input {
+            width: 25vh;
+            height: 25vh;
+            border-radius: 50%;
+            background-color: lightgray;
+            margin: auto;
+        }
+    }
+}

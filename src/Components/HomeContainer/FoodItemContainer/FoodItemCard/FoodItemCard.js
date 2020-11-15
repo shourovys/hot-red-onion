@@ -4,7 +4,7 @@ import AddToCartBtn from '../../../Common/AddToCartBtn/AddToCartBtn';
 // import './FoodItemCard.css'
 
 const FoodItem = ({ food, addToCart }) => {
-    const { _id, name, category, price, img, shotDescription, description } = food
+    const { _id, name,  price, img, shotDescription } = food
     return (
         <div className='foodItem'>
             <Link to={'/food/' + _id} className='foodItemInfo'>

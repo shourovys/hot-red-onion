@@ -60,13 +60,21 @@ function Navbar({ cart, currentUserInfo }) {
         <div className='navbar' className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
+                {/* <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton> */}
 
                     <Typography className={classes.title} variant="h6" noWrap>
                         <Link to='/' className='link'>
                             <Logo />
                         </Link>
                     </Typography>
-
 
                     <div className={classes.grow} />
                     {
