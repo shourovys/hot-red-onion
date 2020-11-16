@@ -4,7 +4,7 @@ import UserInfo from '../../../Authentication/UserInfo';
 const Profile = () => {
     return (
         <div>
-            <UserInfo showBtn={false}/>
+            <UserInfo />
         </div>
     );
 };

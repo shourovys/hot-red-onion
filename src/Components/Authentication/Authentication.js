@@ -81,7 +81,7 @@ const Authentication = () => {
                     </div>
 
                 </div>
-                : <UserInfo />
+                : <UserInfo showBtn={true}/>
             }
         </div>
 

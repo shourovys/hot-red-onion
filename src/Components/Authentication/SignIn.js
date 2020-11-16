@@ -5,9 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 import { motion } from "framer-motion"
-import { inputVariant3, inputVariant4, inputVariant5, inputVariant } from './AnimateVariant';
+import { inputVariant } from './AnimateVariant';
 import { useAuth } from './AuthFunctions';
-// import { usePopup } from '../Notification/PopupContext';
 
 
 
