@@ -1,6 +1,7 @@
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 export const REMOVE_FORM_CART = 'REMOVE_FORM_CART'
+export const REMOVE_ALL_FORM_CART = 'REMOVE_ALL_FORM_CART'
 
 export const addToCart = (food, quantity) => {
     return {
@@ -22,6 +23,12 @@ export const updateQuantity=(foodId,quantity)=>{
 export const removeFormCart = foodId => {
     return {
         type: REMOVE_FORM_CART,
+        foodId: foodId
+    }
+}
+export const removeAllFormCart = foodId => {
+    return {
+        type: REMOVE_ALL_FORM_CART,
         foodId: foodId
     }
 }

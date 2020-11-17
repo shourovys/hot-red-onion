@@ -1,7 +1,6 @@
-import foodData from '../../fakeData'
-import { GET_SAME_CATEGORY_FOODS_DATA, GET_FOOD_ITEM_DATA } from '../Action/FoodsDataAction';
+import { GET_FOOD_ITEM_DATA, GET_SAME_CATEGORY_FOODS_DATA, SET_ALL_FOOD_ITEMS_DATA } from '../Action/FoodsDataAction';
 const foodDataState = {
-    foodData: foodData,
+    foodData: [],
     foodItemData: {},
     sameCategoryFood: []
 }
@@ -10,6 +9,11 @@ const foodDataState = {
 export const foodDataReducer = (state = foodDataState, action) => {
 
     switch (action.type) {
+        case SET_ALL_FOOD_ITEMS_DATA:
+            return {
+                ...state,
+                foodData:action.allFoodData
+            }
         case GET_FOOD_ITEM_DATA:
             return {
                 ...state,

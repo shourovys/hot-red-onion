@@ -1,5 +1,6 @@
-import React from 'react';
-import {Switch,Route} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import UserInfo from '../../../Authentication/UserInfo';
 import AddAdmin from '../../AllRoute/AddAdmin/AddAdmin';
 import AddFood from '../../AllRoute/AddFood/AddFood';
@@ -9,20 +10,45 @@ import OrderHistory from '../../AllRoute/OrderHistory/OrderHistory';
 import Profile from '../../AllRoute/Profile/Profile';
 
 
-const SideBarRoute = () => {
+const SideBarRoute = ({currentUserInfo}) => {
+    const [orderData, setOrderData] = useState([])
+    const [currentOrder, setCurrentOrder] = useState([])
+
+    const handelCurrentOrder=()=>{
+        setCurrentOrder(orderData.filter(order=>order.orderActiveStep<5))
+      }
+
+    useEffect(() => {
+        const userToken=currentUserInfo.token
+        fetch('http://localhost:4000/order/all',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({userToken})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            setOrderData(data)
+            handelCurrentOrder()
+        })
+      }, [])
+
+     
+
     return (
         <Switch>
             <Route exact path='/dashboard'>
-                 <MyOrder/>
+                 <MyOrder currentOrder={currentOrder}/>
             </Route>
             <Route path='/dashboard/profile'>
                 <Profile/>
             </Route>
             <Route path='/dashboard/myOrder'>
-                <MyOrder/>
+                <MyOrder currentOrder={currentOrder}/>
             </Route>
             <Route path='/dashboard/order/history'>
-                <OrderHistory/>
+                <OrderHistory orderData={orderData}/>
             </Route>
             <Route path='/dashboard/logout'>
                 <UserInfo showBtn={true}/>
@@ -44,4 +70,11 @@ const SideBarRoute = () => {
     );
 };
 
-export default SideBarRoute;
+const mapStateToProps=state=>{
+    return {
+        currentUserInfo:state.userInfo.currentUserInfo
+    }
+}
+const mapDispatchToProps={}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SideBarRoute);

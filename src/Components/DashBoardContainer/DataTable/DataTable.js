@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,9 +10,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import PropTypes from 'prop-types';
+import React from 'react';
 import OrderStepper from '../OrderStepper/OrderStepper';
 
 const useRowStyles = makeStyles({
@@ -24,24 +24,11 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
-  };
-}
+
 
 function Row(props) {
   const { row,controller } = props;
-  console.log("Row -> controller", controller)
+  console.log("Row -> row", row)
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -55,12 +42,9 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
+        <TableCell align="left">{row._id}</TableCell>
+        <TableCell align="center">{row.cart.length}</TableCell>
+        <TableCell align="center">{row.createdAt}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -73,28 +57,25 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>Food</TableCell>
-                    <TableCell>Quantity</TableCell>
-                    <TableCell align="center">Total price ($)</TableCell>
+                    <TableCell align="center">Quantity</TableCell>
+                    <TableCell align="center">Item price ($)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  {row.cart.map((cartItem) => (
+                    <TableRow key={cartItem._id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {cartItem.name}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="center">{historyRow.amount}</TableCell>
+                      <TableCell align="center">{cartItem.quantity}</TableCell>
+                      <TableCell align="center">{cartItem.price}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-
-
-
               {
                 controller &&
-                <OrderStepper controller={controller} activeStep={activeStep} setActiveStep={setActiveStep}/>
+                <OrderStepper controller={controller} order={row}/>
               }
             </Box>
           </Collapse>
@@ -122,32 +103,27 @@ Row.propTypes = {
   }).isRequired,
 };
 
-//provide an array ob object for show data
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
-export default function DataTable({controller}) {
+
+export default function DataTable({controller,orderData}) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Order Id </TableCell>
-            <TableCell align="right">Food Item</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Time</TableCell>
+            <TableCell align="left">Order Id </TableCell>
+            <TableCell align="center">Food Item</TableCell>
+            <TableCell align="center">Time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} controller={controller}/>
-          ))}
+          {
+          orderData &&
+          orderData.map((row) => (
+            <Row key={row._id} row={row} controller={controller} />
+          ))
+          }
         </TableBody>
       </Table>
     </TableContainer>

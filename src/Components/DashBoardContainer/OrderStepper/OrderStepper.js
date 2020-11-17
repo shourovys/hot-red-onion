@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Check from '@material-ui/icons/Check';
-import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
+import Step from '@material-ui/core/Step';
+import StepConnector from '@material-ui/core/StepConnector';
+import StepLabel from '@material-ui/core/StepLabel';
+import Stepper from '@material-ui/core/Stepper';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AssignmentTurnedInSharpIcon from '@material-ui/icons/AssignmentTurnedInSharp';
+import Check from '@material-ui/icons/Check';
 import DoneAllSharpIcon from '@material-ui/icons/DoneAllSharp';
+import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
 import LocalPizzaSharpIcon from '@material-ui/icons/LocalPizzaSharp';
 import LocalShippingSharpIcon from '@material-ui/icons/LocalShippingSharp';
-import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { ColorlibConnectorStyle, colorlibStepIconStyles, useQontoStepIconStyles } from './OrderStepperStyle';
 
 
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Order Placed', 'Order Confrmation', 'Preparation','Out for Delivery','Complete'];
+  return ['Order Placed', 'Order Confirmation', 'Preparation','Out for Delivery','Complete'];
 }
 
 function getStepContent(step) {
@@ -104,10 +104,25 @@ function getStepContent(step) {
   }
 }
 
-export default function OrderStepper({controller,activeStep,setActiveStep}) {
+export default function OrderStepper({controller,order}) {
   const classes = useStyles();
-  // const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/order/${order._id}`,{
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({activeStep})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      // setActiveStep(data)
+      console.log('update activeStep',data);
+    })
+  }, [activeStep])
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -120,6 +135,10 @@ export default function OrderStepper({controller,activeStep,setActiveStep}) {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  useEffect(() => {
+    {!controller && setActiveStep(order.orderActiveStep)}
+  }, [order.orderActiveStep])
 
   return (
     <div className={classes.root}>

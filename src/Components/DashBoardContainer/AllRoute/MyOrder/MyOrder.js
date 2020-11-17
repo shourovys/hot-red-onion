@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OrderStepper from '../../OrderStepper/OrderStepper';
 
-const MyOrder = () => {
-  const [activeStep, setActiveStep] = useState(4);
-  //need to fatch currnt order of this user and OrderFood item show in card
+const MyOrder = ({currentOrder}) => {
+  
   return (
     <div>
-      <OrderStepper activeStep={activeStep}setActiveStep={setActiveStep}/>
+      {
+        currentOrder && 
+        currentOrder.map(order=><OrderStepper key={order._id}order={order}/>)
+      }
+      
     </div>
   );
 };

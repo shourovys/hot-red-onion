@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import userSvg from '../../Images/user.svg'
-import firebase from "firebase/app";
 import "firebase/analytics";
+import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig } from "./Firebase.config";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { connect } from "react-redux";
 // import { usePopup } from "../Notification/PopupContext";
 import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
+import userSvg from '../../Images/user.svg';
 import { addCurrentUser } from "../../Redux/Action/UserInfoAction";
-import { connect } from "react-redux";
+import { firebaseConfig } from "./Firebase.config";
 firebase.initializeApp(firebaseConfig);
 
 
@@ -20,13 +20,14 @@ const AuthContext = props => {
     // const { showPupUpWithData } = usePopup()
 
     // common functions
-    const setUser = (user, setName) => {
+    const setUser = (user,token , setName) => {
         if (user) {
             setCurrentUser({
                 isLogin: true,
                 name: user.displayName || setName,
                 email: user.email,
-                photo: user.photoURL || userSvg
+                photo: user.photoURL || userSvg,
+                token:token
             })
             // showPupUpWithData(`${user.displayName || setName} welcome to Ema-John`)
             let { from } = location.state || { from: { pathname: "/login" } }
@@ -40,9 +41,10 @@ const AuthContext = props => {
     const callFirebaseWithProvider = (provider) => {
         firebase.auth().signInWithPopup(provider)
             .then(function (result) {
+                console.log(result);
                 const token = result.credential.accessToken;
                 const user = result.user;
-                setUser(user)
+                setUser(user,token)
             }).catch(error => {
                 const errorMessage = error.message;
                 // showPupUpWithData(errorMessage, 'error')
@@ -72,7 +74,8 @@ const AuthContext = props => {
     const sineUpWithEmail = (name, email, password) => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(res => {
-                setUser(res.user, name)
+                const token = res.credential.accessToken;
+                setUser(res.user,token, name)
                 updateUserName(name)
             })
             .catch(error => {
@@ -82,7 +85,8 @@ const AuthContext = props => {
     const logInWithEmail = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(res => {
-                setUser(res.user)
+                const token = res.credential.accessToken;
+                setUser(res.user,token)
             })
             .catch(error => {
                 // showPupUpWithData(error.message, 'error')

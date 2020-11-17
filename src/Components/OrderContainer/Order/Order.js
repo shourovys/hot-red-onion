@@ -12,7 +12,7 @@ const Order = () => {
                 <DeliveryDetailsForm setAllDeliveryData={setAllDeliveryData}/>
             </div>
             <div className="OrderInfoContainer">
-                <OrderInfo allDeliveryData={allDeliveryData} />
+                <OrderInfo allDeliveryData={allDeliveryData} setAllDeliveryData={setAllDeliveryData}/>
             </div>
 
         </div>

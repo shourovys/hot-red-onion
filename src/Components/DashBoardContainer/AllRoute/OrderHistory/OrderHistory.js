@@ -1,10 +1,10 @@
 import React from 'react';
-import DataTable from '../../DataTable/DataTable'
+import DataTable from '../../DataTable/DataTable';
 
-const OrderHistory = () => {
+const OrderHistory = ({orderData}) => {
   return (
     <div>
-      <DataTable controller={false}/>
+      <DataTable controller={false} orderData={orderData}/>
     </div>
   );
 };

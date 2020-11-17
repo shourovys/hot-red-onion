@@ -1,4 +1,4 @@
-import { ADD_TO_CART,UPDATE_QUANTITY, REMOVE_FORM_CART } from "../Action/CartAction";
+import { ADD_TO_CART, REMOVE_ALL_FORM_CART, REMOVE_FORM_CART, UPDATE_QUANTITY } from "../Action/CartAction";
 
 const cartState = {
     cart: []
@@ -40,6 +40,10 @@ export const cartReducer = (state = cartState, action) => {
         case REMOVE_FORM_CART:
             return {
                 cart: state.cart.filter(cartId => cartId !== action.foodId)
+            }
+        case REMOVE_ALL_FORM_CART:
+            return {
+                cart: []
             }
 
         default:

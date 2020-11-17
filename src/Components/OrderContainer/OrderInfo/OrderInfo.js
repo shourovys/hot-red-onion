@@ -1,10 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateQuantity } from '../../../Redux/Action/CartAction';
+import { removeAllFormCart, updateQuantity } from '../../../Redux/Action/CartAction';
 import OrderedFood from './OrderedFood/OrderedFood';
 import OrderedPrice from './OrderedPrice/OrderedPrice';
 
-const OrderInfo = ({cart,updateQuantity,allDeliveryData}) => {
+const OrderInfo = ({cart,updateQuantity,allDeliveryData,currentUserInfo,setAllDeliveryData,removeAllFormCart}) => {
+
+    const resetOrderData=()=>{
+        setAllDeliveryData(null)
+        removeAllFormCart() 
+    }
+
+    const sendCartData=()=>{
+        const orderInfo={
+            cart:cart,
+            allDeliveryData:allDeliveryData,
+            userToken:currentUserInfo.token,
+            orderActiveStep:1
+        }
+       
+        fetch('http://localhost:4000/order/add',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(orderInfo)
+        }).then(res=>resetOrderData())
+        .catch(err=>console.log(err))
+    }
 
     return (
         <div className='OrderInfo'>
@@ -13,20 +36,27 @@ const OrderInfo = ({cart,updateQuantity,allDeliveryData}) => {
             <p>107 Rd No 8</p>
             <div className="orderFoods">
             {
-                cart.map(cartFood=><OrderedFood cartFood={cartFood} updateQuantity={updateQuantity}/>)
+                cart.map(cartFood=><OrderedFood cartFood={cartFood} key={cartFood._id} updateQuantity={updateQuantity}/>)
             }
             </div>
            <OrderedPrice cart={cart}/>
-           <button className={allDeliveryData?'squareBtn active':'squareBtn inActive'}>Place Order</button>
+           <button 
+           onClick={sendCartData}
+           className={allDeliveryData?'squareBtn active':'squareBtn inActive'}
+           >
+               Place Order
+            </button>
         </div>
     );
 };
 
 const mapStateToProps=state=>{
     return {
-        cart:state.cart.cart
+        cart:state.cart.cart,
+        currentUserInfo:state.userInfo.currentUserInfo
+
     }
 }
 
-const mapDispatchToProps={updateQuantity}
+const mapDispatchToProps={updateQuantity,removeAllFormCart}
 export default connect(mapStateToProps,mapDispatchToProps)(OrderInfo);
