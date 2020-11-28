@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import './FoodImgSlider.css'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import './FoodImgSlider.scss';
 
 const FoodImgSlider = ({ sameCategoryFood }) => {
     const [index, setIndex] = useState(0)

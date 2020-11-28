@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import Authentication from './Components/Authentication/Authentication';
@@ -9,23 +9,17 @@ import FoodItem from './Components/HomeContainer/FoodItem/FoodItem';
 import Home from './Components/HomeContainer/Home/Home';
 import Navbar from './Components/HomeContainer/Navbar/Navbar';
 import Order from './Components/OrderContainer/Order/Order';
-import { setAllFoodItemsData } from './Redux/Action/FoodsDataAction';
+import { fetchAllProduct } from './Redux/Action/FoodsDataAction';
 
 
-const App = ({setAllFoodItemsData}) => {
-  const [foodData, setFoodData] = useState([])
-  useEffect(() => {
-    fetch('http://localhost:4000/foodItem/all')
-    .then(res=>res.json())
-    .then(data=>setFoodData(data))
-    .catch(err=>console.log(err))
-  }, [])
-  useEffect(() => {
-    setAllFoodItemsData(foodData)
-  }, [foodData])
+const App = () => {
+const dispatch = useDispatch()
+
+useEffect(() => {
+  dispatch(fetchAllProduct())
+}, [dispatch])
 
   return (
-    
     <>
       <AuthContext>
         <Navbar />
@@ -55,11 +49,6 @@ const App = ({setAllFoodItemsData}) => {
   );
 };
 
-const mapStateToProps=state=>{
-  return {
 
-  }
-}
-const mapDispatchToProps={setAllFoodItemsData}
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

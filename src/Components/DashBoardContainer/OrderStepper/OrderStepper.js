@@ -94,11 +94,13 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return 'Confirm this order';
     case 1:
-      return 'What is an ad group anyways?';
+      return 'Order foods are preparing';
     case 2:
-      return 'This is the bit I really care about!';
+      return 'Order out for delivery';
+    case 3:
+      return 'Order Complete';
     default:
       return 'Unknown step';
   }
@@ -110,18 +112,23 @@ export default function OrderStepper({controller,order}) {
   const steps = getSteps();
 
   useEffect(() => {
-    fetch(`http://localhost:4000/order/${order._id}`,{
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({activeStep})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      // setActiveStep(data)
-      console.log('update activeStep',data);
-    })
+    // eslint-disable-next-line no-lone-blocks
+    {
+      controller &&(
+        fetch(`http://localhost:4000/order/${order._id}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({activeStep})
+      })
+          .then(res=>res.json())
+          .then(data=>{
+            setActiveStep(data.orderActiveStep)
+            console.log('update activeStep',data);
+          })
+      )  
+    }
   }, [activeStep])
 
   const handleNext = () => {

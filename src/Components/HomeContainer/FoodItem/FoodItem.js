@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { getSameCategoryFoods, getSignalFood } from '../../../api';
 import { addToCart } from '../../../Redux/Action/CartAction';
-import { getFoodItemData, getSameCategoryFoodsData } from '../../../Redux/Action/FoodsDataAction';
 import AddToCartBtn from '../../Common/AddToCartBtn/AddToCartBtn';
 import HandelQuantity from '../../Common/HandelQuantity/HandelQuantity';
 import FoodImgSlider from './FoodImgSlider/FoodImgSlider';
-import './FoodItem.css'
-const FoodItem = ({ getFoodItemData, foodItemData, addToCart, sameCategoryFood, getSameCategoryFoodsData }) => {
+import './FoodItem.scss';
+const FoodItem = () => {
+    const dispatch = useDispatch()
     const { foodId } = useParams()
-    const { _id, name, category, price, img, description } = foodItemData;
+
+    const [thisFoodData, setThisFoodData] = useState({})
+    const [sameCategory, setSameCategory] = useState([])
+
+
+    useEffect( () => {
+        async function fetchData () {
+            const data=await getSignalFood(foodId)
+            setThisFoodData(data.data)
+        }
+        fetchData()
+    }, [foodId])
+
+    const { _id, name, category, price, img, description } = thisFoodData;
+    
+    useEffect( () => {
+        async function fetchData () {
+            const sameFoods=await getSameCategoryFoods(category)
+            setSameCategory(sameFoods.data.filter(food=>food._id!==_id))
+        }
+        category && fetchData()
+    }, [thisFoodData])
 
     const [quantity, setQuantity] = useState(1)
 
-    useEffect(() => {
-        getFoodItemData(foodId)
-    }, [foodId])
-    useEffect(() => {
-        getSameCategoryFoodsData(foodId, category)
-    }, [_id])
-
-
-    // vai sameCategoryFood kano bar bar call hoi quantity update hola
-    // console.log(sameCategoryFood);
-
     return (
         <div className='FoodItem'>
-            <div className=' tow_side_container'>
                 <div className="FoodItemInfo left_side">
                     <h1>{name}</h1>
                     <p>{description}</p>
@@ -34,29 +44,19 @@ const FoodItem = ({ getFoodItemData, foodItemData, addToCart, sameCategoryFood, 
                         <h1>${price}</h1>
                         <HandelQuantity quantity={quantity} setQuantity={setQuantity} />
                     </div>
-                    <AddToCartBtn addToCart={addToCart} foodId={foodId} quantity={quantity} />
+                    <AddToCartBtn addToCart={()=>dispatch(addToCart())} foodId={foodId} quantity={quantity} />
                     {
 
-                        sameCategoryFood.length > 0 &&
-                        <FoodImgSlider sameCategoryFood={sameCategoryFood} />
+                        sameCategory.length > 0 &&
+                        <FoodImgSlider sameCategoryFood={sameCategory} />
                     }
                 </div>
                 <div className="right_side bigImg">
                     <img src={img} alt="" />
                 </div>
-            </div>
-
         </div>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        foodItemData: state.foodData.foodItemData,
-        sameCategoryFood: state.foodData.sameCategoryFood
-    }
-}
-const mapDispatchToProps = { getFoodItemData, addToCart, getSameCategoryFoodsData }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(FoodItem);
+export default FoodItem;

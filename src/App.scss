@@ -3,6 +3,7 @@
 @import "Styles/Variable/Variable";
 @import "./Components/HomeContainer/Search/Search.scss";
 @import "./Components/HomeContainer/FoodItemMenu/FoodItemMenu.scss";
+// @import "./Components/HomeContainer/FoodItem/FoodItem.scss";
 @import "./Components/HomeContainer/FoodItemContainer/FoodItemCard/FoodItemCard.scss";
 @import "./Components/OrderContainer/Order/Order.scss";
 @import "./Components/OrderContainer/DeliveryDetailsForm/DeliveryDetailsForm.scss";
@@ -13,7 +14,6 @@
 @import "./Components/DashBoardContainer/SideBar/SideBar.scss";
 //AllRoute scss
 @import "./Components/DashBoardContainer/AllRoute/Profile/Profile.scss";
-
 @import "./Components/DashBoardContainer/AllRoute/AddAdmin/AddAdmin.scss";
 @import "./Components/DashBoardContainer/AllRoute/AddFood/AddFood.scss";
 $mainColor: red;
