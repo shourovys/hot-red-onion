@@ -66,3 +66,9 @@ body {
     background-color: lightgray;
     cursor: no-drop;
 }
+.MuiSelect-select.MuiSelect-select {
+    padding-right: 240px !important;
+}
+.MuiSelect-selectMenu {
+    overflow: visible !important;
+}

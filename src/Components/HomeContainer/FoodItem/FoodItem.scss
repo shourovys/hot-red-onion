@@ -4,10 +4,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* height: 65vh; */
     flex-wrap: wrap-reverse;
     gap: 1rem;
-    background-color: white;
 }
 
 .FoodItemInfo {
@@ -53,6 +51,7 @@
     // min-height: 16rem;
     height: 90%;
     object-fit: cover;
+    border-radius: 50%;
 }
 @media (max-width: 787px) {
     .bigImg {

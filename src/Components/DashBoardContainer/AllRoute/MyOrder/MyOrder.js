@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { warning } from '../../../../Redux/Action/notificationsAction';
 import { fetchCurrentOrders } from '../../../../Redux/Action/OrderAction';
 import OrderStepper from '../../OrderStepper/OrderStepper';
 
@@ -26,7 +25,6 @@ const MyOrder = () => {
         !saveCurrentOrders.length>0 &&
         <h3 style={{textAlign:'center',margin:'2rem 0rem'}}>No current order available</h3>
       }
-      <button onClick={()=>{dispatch(warning('hello'))}}>kkkk</button>
      
     </div>
   );

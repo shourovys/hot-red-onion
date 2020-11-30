@@ -15,8 +15,10 @@
 }
 .FoodImgSliderImg {
     width: 9rem;
-    object-fit: contain;
+    height: 9rem;
+    object-fit: cover;
     margin: 0 0.5rem;
+    border-radius: 50%;
 }
 .FoodImgSlider > button {
     border: none;

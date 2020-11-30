@@ -5,7 +5,7 @@ import Skeleton from '../Skeleton';
 const SkeletonFoodItem = ({ theme }) => {
    
     return (
-        <div className='skeleton-wrapper light'>
+        <div className='skeleton-wrapper '>
             <div className='FoodItem'>
                 <div className="FoodItemInfo left_side" style={{flexBasis:'50%'}}>
                     <Skeleton type='title' />
