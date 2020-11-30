@@ -7,6 +7,7 @@
     /* height: 65vh; */
     flex-wrap: wrap-reverse;
     gap: 1rem;
+    background-color: white;
 }
 
 .FoodItemInfo {
@@ -44,6 +45,7 @@
     width: 45%;
     display: flex;
     align-items: flex-end;
+    justify-content: center;
 }
 .bigImg > img {
     // min-width: 16rem;

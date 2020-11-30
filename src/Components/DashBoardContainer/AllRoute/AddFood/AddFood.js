@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { encode, decode } from 'js-base64';
+import FileBase from 'react-file-base64';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,6 +127,7 @@ const AddFood = () => {
                       checkInputValue(e.target.name, e.target.value)} 
                       type="number"
                     />
+                    <FileBase type="file" name='img' multiple={false} onDone={({ base64 }) =>checkInputValue('img', base64)} />
                 <button
                 onClick={createNewAdmin}
                 className="squareBtn">ADD</button>

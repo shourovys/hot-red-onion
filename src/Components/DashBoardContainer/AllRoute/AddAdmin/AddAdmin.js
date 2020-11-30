@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { makeAdmin } from '../../../../api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
 export default function AddAdmin() {
   const classes = useStyles();
 
+  const adminEmail = useSelector(state => state.userInfo.currentUserInfo.email)
+
+
   const [adminInfo, setAdminInfo] = useState({})
   const [showError, setShowError] = useState({})
 
@@ -22,7 +27,7 @@ export default function AddAdmin() {
 
     const checkInputValue = (name, value) => {
       switch (name) {
-        case 'email':
+        case 'adminEmail':
           const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
           if (pattern.test(value)) {
               updateAdminInfo(name, value)
@@ -32,25 +37,19 @@ export default function AddAdmin() {
               // showPupUpWithData('Please Enter a Valid Email Address', 'error')
           }
           break;
-          case 'password':
-              if (value.length > 6) {
-                //chack admin password in database and return bullion
-                  updateAdminInfo(name, value)
-                  updateShowError(name, null)
-              } else {
-                  updateShowError(name)
-                  // showPupUpWithData('Please Enter 6 digit Password', 'error')
-              }
-              break;
+          
           default:
               break;
       }
   }
 
-  const createNewAdmin = (event) => {
+  const createNewAdmin = async (event) => {
     event.preventDefault()
-    if ( adminInfo.email && adminInfo.password) {
+    if ( adminInfo.adminEmail) {
     console.log("sineUpNewUser -> Info", adminInfo)
+
+    const {data}=await makeAdmin(adminEmail,adminInfo)
+    console.log("🚀 ~ file: AddAdmin.js ~ line 52 ~ createNewAdmin ~ data", data)
       
         // showPupUpWithData('Your request sended')
     }
@@ -65,25 +64,16 @@ export default function AddAdmin() {
          <form className={classes.root } noValidate autoComplete="off">
             <TextField 
               id="outlined-basic" 
-              name='email'
+              name='adminEmail'
               label="Add Admin Email" 
               variant="outlined" 
               size="small"  
-              error={showError.name} 
+              error={showError.adminEmail} 
               onBlur={(e) => 
               checkInputValue(e.target.name, e.target.value)}
             />
 
-            <TextField 
-              id="outlined-basic" 
-              name='password'
-              label="Enter Your Password" 
-              variant="outlined"  
-              size="small"  
-              error={showError.name} 
-              onBlur={(e) => 
-              checkInputValue(e.target.name, e.target.value)}
-            />
+            
 
             <button className="squareBtn"
               onClick={createNewAdmin}

@@ -28,11 +28,8 @@ const useRowStyles = makeStyles({
 
 function Row(props) {
   const { row,controller } = props;
-  console.log("Row -> row", row)
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-
-  const [activeStep, setActiveStep] = React.useState(3);
 
   return (
     <React.Fragment>
@@ -119,13 +116,17 @@ export default function DataTable({controller,orderData}) {
         </TableHead>
         <TableBody>
           {
-          orderData &&
-          orderData.map((row) => (
-            <Row key={row._id} row={row} controller={controller} />
-          ))
+            orderData &&
+            orderData.map((row) => (
+              <Row key={row._id} row={row} controller={controller} />
+            ))
           }
         </TableBody>
       </Table>
+          {
+            !orderData.length>0 &&
+            <h3 style={{textAlign:'center',margin:'2rem 0rem'}}>You have no Order records</h3>
+          }
     </TableContainer>
   );
 }

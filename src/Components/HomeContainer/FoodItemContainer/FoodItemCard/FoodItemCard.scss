@@ -10,10 +10,18 @@
         box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.1);
     }
 }
+@include mq(800px) {
+    .foodItem {
+        width: 16rem;
+    }
+}
 
 .foodItemInfo {
     text-decoration: none;
     text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     color: black;
     img {
         width: 10rem;

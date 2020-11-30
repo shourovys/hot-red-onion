@@ -14,6 +14,7 @@ import LocalShippingSharpIcon from '@material-ui/icons/LocalShippingSharp';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import { updateOrderStatus } from '../../../api';
 import { ColorlibConnectorStyle, colorlibStepIconStyles, useQontoStepIconStyles } from './OrderStepperStyle';
 
 
@@ -106,49 +107,43 @@ function getStepContent(step) {
   }
 }
 
-export default function OrderStepper({controller,order}) {
+export default function OrderStepper({controller,order,showId}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  useEffect(() => {
-    // eslint-disable-next-line no-lone-blocks
-    {
-      controller &&(
-        fetch(`http://localhost:4000/order/${order._id}`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({activeStep})
-      })
-          .then(res=>res.json())
-          .then(data=>{
-            setActiveStep(data.orderActiveStep)
-            console.log('update activeStep',data);
-          })
-      )  
-    }
-  }, [activeStep])
+  const updateActiveStep= async (activeSteps)=>{
+    const {data} = await updateOrderStatus(order._id,activeSteps)
+    setActiveStep(data.orderActiveStep)
+    console.log("🚀 ~ file: OrderStepper.js ~ line 118 ~ updateActiveStep ~ data", data)
+  }
 
   const handleNext = () => {
+    updateActiveStep(activeStep+1)
+    
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
+    updateActiveStep(activeStep-1)
+
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleReset = () => {
     setActiveStep(0);
+    updateActiveStep(0)
   };
 
   useEffect(() => {
-    {!controller && setActiveStep(order.orderActiveStep)}
+      setActiveStep(order.orderActiveStep)
   }, [order.orderActiveStep])
 
   return (
     <div className={classes.root}>
+      {
+        showId && <h2>{order._id}</h2>
+      }
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>

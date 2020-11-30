@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Logo from '../../Common/Logo/Logo';
-import Nav from './Nav/Nav';
-import './Navbar.css'
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import { MaterialNavbarStyle } from './MaterialStyle';
+import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import Logo from '../../Common/Logo/Logo';
+import { MaterialNavbarStyle } from './MaterialStyle';
+import Nav from './Nav/Nav';
+import './Navbar.css';
 
 
 
@@ -56,6 +50,8 @@ function Navbar({ cart, currentUserInfo }) {
         setCurrentPath(location.pathname)
     }, [location.pathname])
 
+    const history= useHistory()
+
     return (
         <div className='navbar' className={classes.grow}>
             <AppBar position="static">
@@ -77,16 +73,15 @@ function Navbar({ cart, currentUserInfo }) {
                     </Typography>
 
                     <div className={classes.grow} />
-                    {
-                        currentUserInfo.isLogin &&
-                        <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={cart.length} color="secondary">
+                    
+                        <IconButton aria-label="show 4 new mails" color="inherit" >
+                            <Badge badgeContent={cart.length} color="secondary" onClick={()=> cart.length && history.push('/order')}>
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
 
-                    }
-                    {
+                    
+                    {/* {
                         currentUserInfo.isLogin &&
                         <IconButton aria-label="show 17 new notifications" color="inherit">
                             <Badge badgeContent={17} color="secondary">
@@ -94,7 +89,7 @@ function Navbar({ cart, currentUserInfo }) {
                             </Badge>
                         </IconButton>
 
-                    }
+                    } */}
                     {
                         !currentUserInfo.isLogin && currentPath !== '/login' &&
                         <Link to='/login' className='link'>
@@ -114,7 +109,9 @@ function Navbar({ cart, currentUserInfo }) {
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton> */}
-                        <IconButton
+                        {
+                            currentUserInfo.isLogin &&
+                            <IconButton
                             edge="end"
                             aria-label="show more"
                             aria-controls={mobileMenuId}
@@ -123,11 +120,13 @@ function Navbar({ cart, currentUserInfo }) {
                             color="inherit"
                         >
                             <AccountCircle />
-                        </IconButton>
+                        </IconButton>}
                     </div>
 
                     <div className={classes.sectionMobile}>
-                        <IconButton
+                       {
+                       currentUserInfo.isLogin &&
+                       <IconButton
                             aria-label="show more"
                             aria-controls={mobileMenuId}
                             aria-haspopup="true"
@@ -135,7 +134,7 @@ function Navbar({ cart, currentUserInfo }) {
                             color="inherit"
                         >
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton>}
                     </div>
                 </Toolbar>
             </AppBar>

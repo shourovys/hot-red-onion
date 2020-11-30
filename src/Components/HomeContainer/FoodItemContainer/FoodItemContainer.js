@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../../../Redux/Action/CartAction';
+import SkeletonCard from '../../Skeleton/SkeletonCard/SkeletonCard';
 import FoodItemCard from './FoodItemCard/FoodItemCard';
 import './FoodItemContainer.css';
 
 const FoodItemContainer = ({ addToCart, category, cart, makeBtnActive,foodsData }) => {
 
     const [currentCategoryFoods, setCurrentCategoryFoods] = useState([])
-
 
     useEffect(() => {
         setCurrentCategoryFoods(foodsData.filter(item => item.category === category))
@@ -17,12 +17,15 @@ const FoodItemContainer = ({ addToCart, category, cart, makeBtnActive,foodsData 
     return (
         <div className='FoodItemContainer'>
             {
-                currentCategoryFoods.map(food =>
+                currentCategoryFoods.length>0
+
+                ?currentCategoryFoods.map(food =>
                     <FoodItemCard
                         key={food._id}
                         food={food}
                         addToCart={addToCart}
                     />)
+                :[1,2,3,4,5,6].map(n=><SkeletonCard key={n}/>)
             }
         </div>
     );

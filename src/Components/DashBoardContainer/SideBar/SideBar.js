@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -10,22 +8,25 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
+import { useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { useTheme } from '@material-ui/core/styles';
-import { useStyles } from './SideBarStyle';
-import Logo from '../../Common/Logo/Logo';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import BorderAllRoundedIcon from '@material-ui/icons/BorderAllRounded';
-import RestoreTwoToneIcon from '@material-ui/icons/RestoreTwoTone';
 import AddCircleOutlineTwoToneIcon from '@material-ui/icons/AddCircleOutlineTwoTone';
+import AssignmentTurnedInSharpIcon from '@material-ui/icons/AssignmentTurnedInSharp';
+import BorderAllRoundedIcon from '@material-ui/icons/BorderAllRounded';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MenuIcon from '@material-ui/icons/Menu';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import RemoveCircleOutlineTwoToneIcon from '@material-ui/icons/RemoveCircleOutlineTwoTone';
-import { useHistory, useRouteMatch,Switch,Route } from 'react-router-dom';
+import RestoreTwoToneIcon from '@material-ui/icons/RestoreTwoTone';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Logo from '../../Common/Logo/Logo';
 import SideBarRoute from './SideBarRoute/SideBarRoute';
-import AssignmentTurnedInSharpIcon from '@material-ui/icons/AssignmentTurnedInSharp';
+import { useStyles } from './SideBarStyle';
 
 
 
@@ -41,12 +42,14 @@ function SideBar(props) {
   };
 
   const history = useHistory()
-
+  const currentUser = useSelector(state => state.userInfo.currentUserInfo)
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
-      <List>
+      {
+        currentUser.isLogin &&
+        <List onClick={()=>{setMobileOpen(false)}}>
             <ListItem button key={'Profile'} onClick={()=>history.push('/dashboard/profile')}>
                 <ListItemIcon><AccountCircleOutlinedIcon/></ListItemIcon>
                 <ListItemText primary={'Profile'} />
@@ -63,12 +66,18 @@ function SideBar(props) {
                 <ListItemIcon><ExitToAppIcon/></ListItemIcon>
                 <ListItemText primary={'logOut'} />
             </ListItem>
-        </List>
+        </List>}
       <Divider />
-      <List>
+      {
+        currentUser.isAdmin &&
+        <List onClick={()=>{setMobileOpen(false)}}>
             <ListItem button key={'Orders'} onClick={()=>history.push('/dashboard/admin/orders')}>
                 <ListItemIcon><AssignmentTurnedInSharpIcon/></ListItemIcon>
                 <ListItemText primary={'Orders'} />
+            </ListItem>
+            <ListItem button key={'Privies Orders'} onClick={()=>history.push('/dashboard/admin/privies/order')}>
+                <ListItemIcon><RestoreTwoToneIcon/></ListItemIcon>
+                <ListItemText primary={'Privies Orders'} />
             </ListItem>
             <ListItem button key={'Add Admin'} onClick={()=>history.push('/dashboard/add/admin')}>
                 <ListItemIcon><PersonAddOutlinedIcon/></ListItemIcon>
@@ -82,7 +91,7 @@ function SideBar(props) {
                 <ListItemIcon><RemoveCircleOutlineTwoToneIcon/></ListItemIcon>
                 <ListItemText primary={'Remove Food'} />
             </ListItem>
-      </List>
+      </List>}
     </div>
   );
 

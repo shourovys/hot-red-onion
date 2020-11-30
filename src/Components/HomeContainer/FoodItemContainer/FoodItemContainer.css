@@ -1,7 +1,6 @@
 .FoodItemContainer {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 90vw;
-  margin: 0 auto;
-  justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-evenly;
 }

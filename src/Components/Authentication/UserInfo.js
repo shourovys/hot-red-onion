@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useAuth } from './AuthFunctions';
 
 const UserInfo = ({showBtn}) => {
-    const { currentUser: { name, email, photo }, logOut } = useAuth()
+    const {  logOut } = useAuth()
+    const  { name, email, photo }=  useSelector(state => state.userInfo.currentUserInfo)
+
     return (
         <div className='user-info'>
             <img src={photo} alt="Profile" />

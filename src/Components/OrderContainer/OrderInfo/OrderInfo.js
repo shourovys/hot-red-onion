@@ -1,32 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { create } from '../../../api';
 import { removeAllFormCart, updateQuantity } from '../../../Redux/Action/CartAction';
 import OrderedFood from './OrderedFood/OrderedFood';
 import OrderedPrice from './OrderedPrice/OrderedPrice';
 
 const OrderInfo = ({cart,updateQuantity,allDeliveryData,currentUserInfo,setAllDeliveryData,removeAllFormCart}) => {
-
+    const history = useHistory()
     const resetOrderData=()=>{
         setAllDeliveryData(null)
-        removeAllFormCart() 
+        removeAllFormCart()
+        history.replace('/dashboard/myOrder')
     }
 
-    const sendCartData=()=>{
+    const sendCartData= async ()=>{
         const orderInfo={
             cart:cart,
             allDeliveryData:allDeliveryData,
-            userToken:currentUserInfo.token,
+            userEmail:currentUserInfo.email,
             orderActiveStep:1
         }
        
-        fetch('http://localhost:4000/order/add',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(orderInfo)
-        }).then(res=>resetOrderData())
-        .catch(err=>console.log(err))
+        try {
+            const res = await create(orderInfo)
+            console.log("🚀 ~ file: OrderInfo.js ~ line 27 ~ sendCartData ~ res", res)
+            resetOrderData()
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

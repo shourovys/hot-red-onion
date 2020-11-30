@@ -1,13 +1,15 @@
 import "firebase/analytics";
 import firebase from "firebase/app";
 import "firebase/auth";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { connect } from "react-redux";
 // import { usePopup } from "../Notification/PopupContext";
-import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { isThisAdmin } from "../../api";
 import userSvg from '../../Images/user.svg';
 import { addCurrentUser } from "../../Redux/Action/UserInfoAction";
 import { firebaseConfig } from "./Firebase.config";
+
 firebase.initializeApp(firebaseConfig);
 
 
@@ -17,7 +19,6 @@ const AuthContext = props => {
     const history = useHistory();
     const location = useLocation();
     const [currentUser, setCurrentUser] = useState({})
-    // const { showPupUpWithData } = usePopup()
 
     // common functions
     const setUser = (user,token , setName) => {
@@ -27,15 +28,35 @@ const AuthContext = props => {
                 name: user.displayName || setName,
                 email: user.email,
                 photo: user.photoURL || userSvg,
-                token:token
+                token:token,
+                isAdmin: false
             })
-            // showPupUpWithData(`${user.displayName || setName} welcome to Ema-John`)
-            let { from } = location.state || { from: { pathname: "/login" } }
-            history.replace(from)
-
+            
+            const adminEmail = async ()=>{
+               const {data}= await isThisAdmin(user.email)
+                const userInfo = {
+                    isLogin: true,
+                    name: user.displayName || setName,
+                    email: user.email,
+                    photo: user.photoURL || userSvg,
+                    token:token,
+                    isAdmin: data
+                }
+                setCurrentUser(userInfo)
+                props.addCurrentUser(userInfo)
+                localStorage.setItem('currentUser',JSON.stringify(userInfo))
+                // showPupUpWithData(`${user.displayName || setName} welcome to Ema-John`)
+                let { from } = location.state || { from: { pathname: "/" } }
+                history.replace(from)
+            }
+            adminEmail()
+            
         } else {
             setCurrentUser({})
+            props.addCurrentUser({})
+            localStorage.setItem('currentUser',JSON.stringify({}))
         }
+        
     }
 
     const callFirebaseWithProvider = (provider) => {
@@ -96,16 +117,17 @@ const AuthContext = props => {
         firebase.auth().signOut()
             .then(function () {
                 // showPupUpWithData('You are successfully Log Out')
-                setCurrentUser({})
+                setUser()
+                history.replace('/')
+               
             }).catch(error => {
                 // showPupUpWithData(error.message, 'error')
             })
     }
 
-    useEffect(() => {
-        props.addCurrentUser(currentUser)
-        console.log('currentUser send')
-    }, [currentUser])
+   
+
+    console.log('current user in auth funetion ',currentUser );
 
     return (
         <authContext.Provider value={{ sineUpWithGoogle, sineUpWithFacebook, sineUpWithEmail, logInWithEmail, logOut, currentUser }}>
@@ -118,31 +140,11 @@ const mapStateToProps = state => {
     return {}
 }
 const mapDispatchToProps = {
-    addCurrentUser
+    addCurrentUser,
+    
 }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthContext);
 export const useAuth = () => useContext(authContext)
 
-export const PrivateRoute = ({ children, ...rest }) => {
-    const { currentUser } = useAuth()
-
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                currentUser.isLogin ? (
-                    children
-                ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: location }
-                            }}
-                        />
-                    )
-            }
-        />
-    );
-}

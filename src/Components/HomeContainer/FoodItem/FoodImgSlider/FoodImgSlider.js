@@ -7,11 +7,11 @@ import './FoodImgSlider.scss';
 const FoodImgSlider = ({ sameCategoryFood }) => {
     const [index, setIndex] = useState(0)
     const handelIndexBack = () => {
-        setIndex(index > 0 ? index - 1 : sameCategoryFood.length - 2)
+        setIndex(index > 0 ? index - 2 : sameCategoryFood.length - 2)
 
     }
     const handelIndexForward = () => {
-        setIndex(index < sameCategoryFood.length - 2 ? index + 1 : 0)
+        setIndex(index < sameCategoryFood.length - 2 ? index + 2 : 0)
     }
 
 

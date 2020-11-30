@@ -1,7 +1,7 @@
 import { ADD_TO_CART, REMOVE_ALL_FORM_CART, REMOVE_FORM_CART, UPDATE_QUANTITY } from "../Action/CartAction";
 
 const cartState = {
-    cart: []
+    cart: JSON.parse(localStorage.getItem('cartFoods'))||[]
 }
 
 export const cartReducer = (state = cartState, action) => {
@@ -25,6 +25,7 @@ export const cartReducer = (state = cartState, action) => {
                 }
                 newCart = [...cart, newObj];
             }
+            localStorage.setItem('cartFoods',JSON.stringify(newCart))
             return {
                 cart: newCart
             }
@@ -42,6 +43,7 @@ export const cartReducer = (state = cartState, action) => {
                 cart: state.cart.filter(cartId => cartId !== action.foodId)
             }
         case REMOVE_ALL_FORM_CART:
+            localStorage.setItem('cartFoods','[]')
             return {
                 cart: []
             }

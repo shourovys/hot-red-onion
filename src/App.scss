@@ -12,6 +12,7 @@
 @import "./Components/OrderContainer/OrderInfo/OrderedPrice/OrderedPrice.scss";
 @import "./Components/DashBoardContainer/DashBoard/DashBoard.scss";
 @import "./Components/DashBoardContainer/SideBar/SideBar.scss";
+@import "./Components/Authentication/Authentication.scss";
 //AllRoute scss
 @import "./Components/DashBoardContainer/AllRoute/Profile/Profile.scss";
 @import "./Components/DashBoardContainer/AllRoute/AddAdmin/AddAdmin.scss";
@@ -47,7 +48,6 @@ body {
 }
 .squareBtn {
     width: 100%;
-    padding: 0 6rem;
     height: 2.4rem;
     margin: 1rem 0;
     color: $textColor;

@@ -5,6 +5,7 @@ import { getSameCategoryFoods, getSignalFood } from '../../../api';
 import { addToCart } from '../../../Redux/Action/CartAction';
 import AddToCartBtn from '../../Common/AddToCartBtn/AddToCartBtn';
 import HandelQuantity from '../../Common/HandelQuantity/HandelQuantity';
+import SkeletonFoodItem from '../../Skeleton/SkeletonFoodItem/SkeletonFoodItem';
 import FoodImgSlider from './FoodImgSlider/FoodImgSlider';
 import './FoodItem.scss';
 const FoodItem = () => {
@@ -36,25 +37,29 @@ const FoodItem = () => {
     const [quantity, setQuantity] = useState(1)
 
     return (
-        <div className='FoodItem'>
-                <div className="FoodItemInfo left_side">
-                    <h1>{name}</h1>
-                    <p>{description}</p>
-                    <div className="price_quantity">
-                        <h1>${price}</h1>
-                        <HandelQuantity quantity={quantity} setQuantity={setQuantity} />
-                    </div>
-                    <AddToCartBtn addToCart={()=>dispatch(addToCart())} foodId={foodId} quantity={quantity} />
-                    {
+        <>{
+            thisFoodData.name 
+           ? <div className='FoodItem'>
+                    <div className="FoodItemInfo left_side">
+                        <h1>{name}</h1>
+                        <p>{description}</p>
+                        <div className="price_quantity">
+                            <h1>${price}</h1>
+                            <HandelQuantity quantity={quantity} setQuantity={setQuantity} />
+                        </div>
+                        <AddToCartBtn addToCart={()=>dispatch(addToCart())} foodId={foodId} quantity={quantity} />
+                        {
 
-                        sameCategory.length > 0 &&
-                        <FoodImgSlider sameCategoryFood={sameCategory} />
-                    }
-                </div>
-                <div className="right_side bigImg">
-                    <img src={img} alt="" />
-                </div>
-        </div>
+                            sameCategory.length > 0 &&
+                            <FoodImgSlider sameCategoryFood={sameCategory} />
+                        }
+                    </div>
+                    <div className="right_side bigImg">
+                        <img src={img} alt="" />
+                    </div>
+            </div>
+           : <SkeletonFoodItem/>
+        }</>
     );
 };
 

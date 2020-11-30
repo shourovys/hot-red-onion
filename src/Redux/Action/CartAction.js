@@ -26,9 +26,9 @@ export const removeFormCart = foodId => {
         foodId: foodId
     }
 }
-export const removeAllFormCart = foodId => {
+export const removeAllFormCart = () => {
     return {
         type: REMOVE_ALL_FORM_CART,
-        foodId: foodId
+        
     }
 }
