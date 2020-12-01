@@ -5,6 +5,7 @@
 /.pnp
 /hot-onion-restaurent-resources
 .pnp.js
+/src/Components/Authentication/Firebase.config.js
 
 # testing
 /coverage

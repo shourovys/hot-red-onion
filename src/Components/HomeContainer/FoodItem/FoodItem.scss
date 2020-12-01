@@ -1,0 +1,78 @@
+.FoodItem {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    gap: 1rem;
+}
+
+.FoodItemInfo {
+    max-width: 24rem;
+    margin: 2rem 1rem;
+}
+
+@media (max-width: 785px) {
+    .FoodItem {
+        height: 100%s;
+    }
+    .FoodItemInfo {
+        max-width: 90vw !important;
+        margin: 0 1rem;
+    }
+}
+.FoodItemInfo > h1 {
+    margin: 1rem 0;
+}
+.FoodItemInfo > P {
+    font-size: 14px;
+    opacity: 0.5;
+    margin: 0.3rem 0;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+.price_quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+.bigImg {
+    height: 60%;
+    width: 45%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.bigImg > img {
+    // min-width: 16rem;
+    width: 90%;
+    // min-height: 16rem;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+@media (max-width: 787px) {
+    .bigImg {
+        justify-content: center;
+        align-items: center;
+        padding-top: 1rem;
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .bigImg {
+        justify-content: center;
+        align-items: center;
+        padding-top: 1rem;
+        width: 90%;
+    }
+}
+
+/* @media (max-width: 350px) {
+  .FoodItem {
+    padding-top: 70vh;
+  }
+} */

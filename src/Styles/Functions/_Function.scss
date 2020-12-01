@@ -1,0 +1,33 @@
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin flexCenterWithColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin towSide {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    gap: 1rem;
+}
+@mixin leftSide {
+    flex-basis: 45%;
+    width: 100%;
+}
+@mixin rightSide {
+    flex-basis: 45%;
+    width: 100%;
+}
+
+@mixin mq($size) {
+    @media only screen and (max-width: $size) {
+        @content;
+    }
+}

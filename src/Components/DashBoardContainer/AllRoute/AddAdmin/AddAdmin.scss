@@ -1,0 +1,17 @@
+.AddAdmin {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+
+    .inputField {
+        width: 20rem;
+    }
+    .outlined-basic {
+        display: block;
+    }
+    @include mq(500px) {
+        .inputField {
+            width: 15rem;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 70vh;
+  background: url(../../../Images/Background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.input-container {
+  position: relative;
+  margin-top: 2rem;
+}
+.input-container > input {
+  border: none;
+  outline: none;
+  line-height: 2.2rem;
+  max-width: 90vw;
+  min-width: 25vw;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  border-radius: 18px;
+}
+.input-container > input::placeholder {
+  color: #ddd;
+  font-size: 0.8rem;
+  margin: auto 0;
+}
+.input-container > button {
+  position: absolute;
+  right: 0;
+}
