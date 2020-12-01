@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import React, { useEffect, useState } from 'react';
 import { inputVariant } from './AnimateVariant';
 import { useAuth } from './AuthFunctions';
 

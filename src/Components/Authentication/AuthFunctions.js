@@ -3,10 +3,10 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import React, { createContext, useContext, useState } from "react";
 import { connect } from "react-redux";
-// import { usePopup } from "../Notification/PopupContext";
 import { useHistory, useLocation } from "react-router-dom";
 import { isThisAdmin } from "../../api";
 import userSvg from '../../Images/user.svg';
+import { errorNF, successNF } from "../../Redux/Action/notificationsAction";
 import { addCurrentUser } from "../../Redux/Action/UserInfoAction";
 import { firebaseConfig } from "./Firebase.config";
 
@@ -16,6 +16,7 @@ firebase.initializeApp(firebaseConfig);
 const authContext = createContext()
 
 const AuthContext = props => {
+    const dispatch = useDispatch()
     const history = useHistory();
     const location = useLocation();
     const [currentUser, setCurrentUser] = useState({})
@@ -45,7 +46,7 @@ const AuthContext = props => {
                 setCurrentUser(userInfo)
                 props.addCurrentUser(userInfo)
                 localStorage.setItem('currentUser',JSON.stringify(userInfo))
-                // showPupUpWithData(`${user.displayName || setName} welcome to Ema-John`)
+                dispatch(successNF(`${user.displayName || setName} welcome to Ema-John`))
                 let { from } = location.state || { from: { pathname: "/" } }
                 history.replace(from)
             }
@@ -56,8 +57,9 @@ const AuthContext = props => {
             props.addCurrentUser({})
             localStorage.setItem('currentUser',JSON.stringify({}))
         }
-        
     }
+
+    const showError =(data)=>dispatch(errorNF(data))
 
     const callFirebaseWithProvider = (provider) => {
         firebase.auth().signInWithPopup(provider)
@@ -68,7 +70,7 @@ const AuthContext = props => {
                 setUser(user,token)
             }).catch(error => {
                 const errorMessage = error.message;
-                // showPupUpWithData(errorMessage, 'error')
+                showError(errorMessage)
             })
     }
 
@@ -78,9 +80,6 @@ const AuthContext = props => {
             .then(() => console.log('name update'))
             .catch(() => console.log('name not update'));
     }
-
-
-
 
     // function for interact with firebase
     const sineUpWithGoogle = () => {
@@ -100,7 +99,7 @@ const AuthContext = props => {
                 updateUserName(name)
             })
             .catch(error => {
-                // showPupUpWithData(error.message, 'error')
+                showError(error.message)
             })
     }
     const logInWithEmail = (email, password) => {
@@ -110,24 +109,21 @@ const AuthContext = props => {
                 setUser(res.user,token)
             })
             .catch(error => {
-                // showPupUpWithData(error.message, 'error')
+                 showError(error.message)
             })
     }
     const logOut = () => {
         firebase.auth().signOut()
             .then(function () {
-                // showPupUpWithData('You are successfully Log Out')
+               dispatch(errorNF(('You are successfully Log Out')))
                 setUser()
                 history.replace('/')
                
             }).catch(error => {
-                // showPupUpWithData(error.message, 'error')
+                showError(error.message)
             })
     }
 
-   
-
-    console.log('current user in auth funetion ',currentUser );
 
     return (
         <authContext.Provider value={{ sineUpWithGoogle, sineUpWithFacebook, sineUpWithEmail, logInWithEmail, logOut, currentUser }}>
